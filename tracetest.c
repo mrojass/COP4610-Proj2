@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
-
+#include <fcntl.h>
 //  open()
 //  read()
 //  write()
@@ -27,6 +27,6 @@
 
 int main(int argc, const char *argv[])
 {
-    
+    int fd = open("text.txt", O_WRONLY | O_RDONLY | O_CREAT | O_APPEND);
     return 0;
 }
