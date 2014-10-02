@@ -11,15 +11,13 @@
 #include <errno.h>
 
 
-//  fork()
-//  exec()
-//  wait()
 //  getTime()
 //  getpid()
 //  getcwd()
 
 int main(int argc, const char *argv[])
-{
+{   
+    struct time t;
     unsigned time;
     struct sysinfo info;
     struct stat fileStat;
@@ -55,6 +53,9 @@ int main(int argc, const char *argv[])
     if(kill( getpid(), SIGCHLD ) != 0)
         printf("kill error: %s\n", strerror(errno));
 
+    gettime(&t);
+
+    printf("Current")
     //Path from getcwd
     //if(chroot(PATH) != 0)
     //    printf("chroot error: %s\n", strerror(errno));
@@ -62,17 +63,22 @@ int main(int argc, const char *argv[])
     if(sysinfo(&info) != 0)
         printf("sysinfo error: %s\n", strerror(errno));
 
-    int childpid = fork();
+    int childPID = fork();
 
-    if (childpid == 0)
+    if (childPID == 0)
     {
+        printf("child PID = %d\n", getpid());
+
         exec("/bin/sleep", "10");
 
     } else {
-        int childFinished;
+        int status;
 
-        childFinished = waitpid(0, 0, (int *) NULL);
+        wait(&status);
+        
+        printf("parent PID = %d\n", getpid());
     }
+
 
     close(fd);
 
