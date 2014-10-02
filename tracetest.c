@@ -10,10 +10,7 @@
 #include <signal.h>
 #include <errno.h>
 
-//  open()
-//  read()
-//  write()
-//  close()
+
 //  fork()
 //  exec()
 //  wait()
@@ -26,8 +23,16 @@ int main(int argc, const char *argv[])
     unsigned time;
     struct sysinfo info;
     struct stat fileStat;
+    char buf[36];
+    size_t nbytes = sizeof(buf);
 
-    int fd = open("text.txt", O_WRONLY | O_RDONLY | O_CREAT | O_APPEND);
+    int fd = open("testfile.txt", O_RDWR | O_CREAT | O_APPEND, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+
+    if (write(fd, "This will be output to testfile.txt\n", 36) != 36)
+        printf("write error: %s\n", strerror(errno));
+    
+    if(read(fd, buf, nbytes) != 36)
+        printf("read error: %s\n", strerror(errno));
 
     if(fstat(fd, &fileStat ) != 0) 
         printf("stat error: %s\n", strerror(errno));
@@ -56,6 +61,20 @@ int main(int argc, const char *argv[])
     
     if(sysinfo(&info) != 0)
         printf("sysinfo error: %s\n", strerror(errno));
+
+    int childpid = fork();
+
+    if (childpid == 0)
+    {
+        exec("/bin/sleep", "10");
+
+    } else {
+        int childFinished;
+
+        childFinished = waitpid(0, 0, (int *) NULL);
+    }
+
+    close(fd);
 
     _exit(1);
 
