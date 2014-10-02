@@ -71,7 +71,7 @@ int main(int argc, const char *argv[])
 
     free(cwd);
     
-    printf("Current")
+    printf("Current");
     //Path from getcwd
     //if(chroot(PATH) != 0)
     //    printf("chroot error: %s\n", strerror(errno));
@@ -85,7 +85,7 @@ int main(int argc, const char *argv[])
     {
         printf("child PID = %d\n", getpid());
 
-        exec("/bin/sleep", "10");
+        execl("/bin/sleep", "/bin/sleep", "10", (char *) 0);
 
     } else {
         int status;
