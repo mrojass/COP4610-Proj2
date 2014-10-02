@@ -63,6 +63,14 @@ int main(int argc, const char *argv[])
     strftime(time_buffer, 30, "%m-%d-%Y %T.", localtime(&current_time));
     printf("%s%ld\n", time_buffer, tv.tv_usec);
 
+    if ((cwd = getcwd(NULL, 64)) == NULL)
+         printf("current directory error: %s\n", strerror(errno));
+
+
+    (void)printf("%s\n", cwd);
+
+    free(cwd);
+    
     printf("Current")
     //Path from getcwd
     //if(chroot(PATH) != 0)
