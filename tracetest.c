@@ -2,7 +2,10 @@
 #include <string.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <time.h>
+#include <stdlib.h>
 
+#include <sys/time.h>
 #include <sys/syscall.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -10,19 +13,17 @@
 #include <signal.h>
 #include <errno.h>
 
-
-//  getTime()
-//  getpid()
 //  getcwd()
 
 int main(int argc, const char *argv[])
 {   
-    struct time t;
+    struct timeval tv;
     unsigned time;
     struct sysinfo info;
     struct stat fileStat;
-    char buf[36];
+    char buf[36], time_buffer[30];
     size_t nbytes = sizeof(buf);
+    char *cwd;
 
     int fd = open("testfile.txt", O_RDWR | O_CREAT | O_APPEND, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
 
@@ -53,7 +54,14 @@ int main(int argc, const char *argv[])
     if(kill( getpid(), SIGCHLD ) != 0)
         printf("kill error: %s\n", strerror(errno));
 
-    gettime(&t);
+    if (gettimeofday(&tv, NULL) != 0)
+        printf("time error: %s\n", strerror(errno));
+    time_t current_time;
+
+    current_time = tv.tv_sec;
+
+    strftime(time_buffer, 30, "%m-%d-%Y %T.", localtime(&current_time));
+    printf("%s%ld\n", time_buffer, tv.tv_usec);
 
     printf("Current")
     //Path from getcwd
