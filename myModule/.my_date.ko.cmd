@@ -1,0 +1,1 @@
+cmd_/home/michelle/repos/COP4610-Proj2/myModule/my_date.ko := ld -r -m elf_x86_64 -T /usr/src/linux-headers-3.8.0-29-generic/scripts/module-common.lds --build-id  -o /home/michelle/repos/COP4610-Proj2/myModule/my_date.ko /home/michelle/repos/COP4610-Proj2/myModule/my_date.o /home/michelle/repos/COP4610-Proj2/myModule/my_date.mod.o
