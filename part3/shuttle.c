@@ -2,6 +2,7 @@
 #include <linux/syscalls.h>
 #include <linux/linkage.h>
 #include <linux/export.h>
+#include <linux/kthread.h>
 
 int(*STUB_start_shuttle)(void) = NULL;
 int(*STUB_stop_shuttle)(void) = NULL;
