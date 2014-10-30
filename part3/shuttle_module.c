@@ -15,6 +15,10 @@ MODULE_LICENSE("GPL");
 // *******************
 static int shuttle_init(void);
 static int shuttle_exit(void);
+int start_shuttle(void);
+int issue_request(char passenger_type, int initial_terminal, int destination_terminal);
+int stop_shuttle(void);
+
 
 // *******************
 // Proc Entry 
@@ -60,9 +64,12 @@ static int proc_stats(struct seq_file *m, void *v){
 // **************
 static int shuttle_init(void)
 {
+    STUB_start_shuttle = start_shuttle;
+    STUB_stop_shuttle = stop_shuttle;
+    STUB_issue_request = issue_request;
     entry = proc_create("terminal", 0, NULL, &proc_fops);
     if(entry == NULL)
-	return -ENOMEM;
+	   return -ENOMEM;
 
 	return 0;
 }
@@ -72,7 +79,22 @@ static int shuttle_init(void)
 // ****************
 static int shuttle_exit(void)
 {
+    STUB_start_shuttle = NULL;
+    STUB_stop_shuttle = NULL;
+    STUB_issue_request = NULL;
     proc_remove(entry);
+    return 0;
+}
+
+int start_shuttle(void){
+    return 0;
+}
+int issue_request(char passenger_type, int initial_terminal, int destination_terminal)
+{
+    return 0;
+}
+int stop_shuttle(void)
+{
     return 0;
 }
 
