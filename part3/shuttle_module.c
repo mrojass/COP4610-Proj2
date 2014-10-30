@@ -1,4 +1,7 @@
 #include <linux/kernel.h>
+#include <linux/module.h>
+#include <linux/proc_fs.h>
+#include <linux/seq_file.h>
 #include <linux/syscalls.h>
 #include <linux/linkage.h>
 #include <linux/export.h>
@@ -6,22 +9,25 @@
 
 MODULE_LICENSE("GPL");
 
+// *******************
+// Module Function
+// 	Declarations
+// *******************
+static int shuttle_init(void);
+static int shuttle_exit(void);
 
 // *******************
-// Proc Open
+// Proc Entry 
+// 	Declaration
 // *******************
-static proc_open(struct inode *inode, struct file *file){
-    return single_open(file, proc_stats, NULL);
-}
+static struct proc_dir_entry * entry;
 
-// ******************
-// Prints  Stats
-//  about the terminal
-// ******************
-static proc__stats(struct seq_file *m, void *v){
-    seq_printf(m, "Dis Fo' Stats.\n");
-    return 0;
-}
+// *******************
+// Function 
+// 	Declarations
+// *******************
+static int proc_open(struct inode *inode, struct file *file);
+static int proc_stats(struct seq_file *m, void *v);
 
 // ******************
 // File OP Struct
@@ -33,33 +39,42 @@ static const struct file_operations proc_fops={
     .release = single_release,
 };
 
+// *******************
+// Proc Open
+// *******************
+static int proc_open(struct inode *inode, struct file *file){
+    return single_open(file, proc_stats, NULL);
+}
+
+// ******************
+// Prints  Stats
+//  about the terminal
+// ******************
+static int proc_stats(struct seq_file *m, void *v){
+    seq_printf(m, "Dis Fo' Stats.\n");
+    return 0;
+}
+
 // 
 // Shuttle Set up
 //
 static int shuttle_init(void)
 {
-    proc_create("terminal", 0, NULL, &proc_fops);
-    return 0;
+    entry = proc_create("terminal", 0, NULL, &proc_fops);
+    if(entry == NULL)
+	return -ENOMEM;
+
+	return 0;
 }
 
 // 
+// Shuttle Clean up
 //
 static int shuttle_exit(void)
 {
-    proc_remove_entry("terminal", NULL);
+    proc_remove(entry);
     return 0;
 }
-
-/*
-static int _init shuttle_proc_init(void){
-    proc_create("terminal", 0, NULL, &proc_fops);
-    return 0;
-}
-
-static void _exit shuttle_proc_exit(void){
-    remove_proc_entry("terminal", NULL);
-}
-*/
 
 module_init(shuttle_init);
 module_exit(shuttle_exit);
