@@ -5,6 +5,8 @@ extern struct Shuttle shuttle;
 static int loadPassengers();
 static int unloadPassengers();
 
+void clearShuttle(struct Shuttle * shuttle);
+
 // ********************************************
 // Run starts the shuttle.
 //  If already started, it takes in passengers

@@ -55,9 +55,9 @@ static int proc_stats(struct seq_file *m, void *v){
     return 0;
 }
 
-// 
+// ************** 
 // Shuttle Set up
-//
+// **************
 static int shuttle_init(void)
 {
     entry = proc_create("terminal", 0, NULL, &proc_fops);
@@ -67,9 +67,9 @@ static int shuttle_init(void)
 	return 0;
 }
 
-// 
+// ****************
 // Shuttle Clean up
-//
+// ****************
 static int shuttle_exit(void)
 {
     proc_remove(entry);
