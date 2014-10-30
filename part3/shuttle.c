@@ -12,7 +12,7 @@ void clearShuttle(struct Shuttle * shuttle);
 //  If already started, it takes in passengers
 //   until it has been stopped.
 // ********************************************
-int main_run(){
+int main_run(void){
 
 	//While shuttle is running
 	//	if passenger want to get off at current terminal

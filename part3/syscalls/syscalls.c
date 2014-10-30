@@ -20,7 +20,7 @@ asmlinkage int sys_start_shuttle(void){
     return 0;
 }
 
-asmlinkage int sys_top_shuttle(void){
+asmlinkage int sys_stop_shuttle(void){
     if(STUB_stop_shuttle)
         STUB_stop_shuttle();
     else

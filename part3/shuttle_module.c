@@ -7,6 +7,9 @@
 #include <linux/export.h>
 #include <linux/kthread.h>
 
+#include "syscalls.h"
+#include "shuttle.h"
+
 MODULE_LICENSE("GPL");
 
 // *******************
@@ -15,14 +18,10 @@ MODULE_LICENSE("GPL");
 // *******************
 static int shuttle_init(void);
 static int shuttle_exit(void);
+
 extern int(*STUB_start_shuttle) (void);
-extern int(*STUB_issue_request) (void);
+extern int(*STUB_issue_request) (char passenger_type, int initial_terminal, int destination_terminal);
 extern int(*STUB_stop_shuttle) (void);
-
-
-int start_shuttle(void);
-int issue_request(char passenger_type, int initial_terminal, int destination_terminal);
-int stop_shuttle(void);
 
 
 // *******************
@@ -76,6 +75,11 @@ static int shuttle_init(void)
     if(entry == NULL)
 	   return -ENOMEM;
 
+
+	STUB_start_shuttle = &start_shuttle;
+	STUB_stop_shuttle = &stop_shuttle;
+	STUB_issue_request = &issue_request;
+
 	return 0;
 }
 
@@ -88,18 +92,7 @@ static int shuttle_exit(void)
     STUB_stop_shuttle = NULL;
     STUB_issue_request = NULL;
     proc_remove(entry);
-    return 0;
-}
 
-int start_shuttle(void){
-    return 0;
-}
-int issue_request(char passenger_type, int initial_terminal, int destination_terminal)
-{
-    return 0;
-}
-int stop_shuttle(void)
-{
     return 0;
 }
 
