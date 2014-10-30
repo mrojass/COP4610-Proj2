@@ -6,10 +6,11 @@
 #include <linux/list_sort.h>
 #include <linux/time.h>
 
-// **************
-// ShuttleStatus
-// **************
-enum ShuttleStatus { OFFLINE=0, DEACTIVATING=1, MOVING=2, PARKED=3};
+// *****************
+// Enum Declarations
+// *****************
+enum shuttleStatus { OFFLINE=0, DEACTIVATING=1, MOVING=2, PARKED=3};
+enum passengerType { CHILD=0, ADULT=1, LUGGAGE=2 };
 
 // **************
 // Shuttle Struct
@@ -27,10 +28,29 @@ struct Shuttle{
 	struct timespec timeStarted;
 	struct timespec timeStopped;
 
-	enum ShuttleStatus status;
+	enum shuttleStatus status;
 };
+
+// *************
+// Passenger
+//  Struct
+// *************
+struct Passenger{
+	int initialTerminal;
+	int destinationTerminal;
+	
+	//Doule Linked List
+	struct list_head list;
+
+	//Enum
+	enum passengerType type;
+};
+
 
 // **********************
 // Function Declarations
 // **********************
-int main_run();
+int main_run(); 	//Main functionality.
+
+
+
