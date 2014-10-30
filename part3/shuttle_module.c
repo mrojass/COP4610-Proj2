@@ -15,6 +15,11 @@ MODULE_LICENSE("GPL");
 // *******************
 static int shuttle_init(void);
 static int shuttle_exit(void);
+extern int(*STUB_start_shuttle) (void);
+extern int(*STUB_issue_request) (void);
+extern int(*STUB_stop_shuttle) (void);
+
+
 int start_shuttle(void);
 int issue_request(char passenger_type, int initial_terminal, int destination_terminal);
 int stop_shuttle(void);
