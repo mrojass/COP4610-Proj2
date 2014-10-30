@@ -1,5 +1,9 @@
 ifneq ($(KERNELRELEASE),)
-	obj-m:= my_date.o
+	TARGET = shuttle_module
+
+	shuttle_module-obj := shuttle_module.o
+
+	obj-m:= $(TARGET).o
 
 else
 	KERNELDIR ?= /lib/modules/$(shell uname -r)/build/

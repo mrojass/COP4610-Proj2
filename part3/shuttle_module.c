@@ -6,22 +6,26 @@
 
 MODULE_LICENSE("GPL");
 
-static int shuttle_init(void)
-{
-    printk(KERN_ALERT "Whatchu doin?\n");
-    return 0;
-}
 
-static int shuttle_exit(void)
-{
-    printk(KERN_ALERT "Nuthin chillin at the Holiday Inn\n");
-    return 0;
-}
-
+// *******************
+// Proc Open
+// *******************
 static proc_open(struct inode *inode, struct file *file){
-    return single_open(file, proc_show, NULL);
+    return single_open(file, proc_stats, NULL);
 }
 
+// ******************
+// Prints  Stats
+//  about the terminal
+// ******************
+static proc__stats(struct seq_file *m, void *v){
+    seq_printf(m, "Dis Fo' Stats.\n");
+    return 0;
+}
+
+// ******************
+// File OP Struct
+//*******************
 static const struct file_operations proc_fops={
     .owner = THIS_MODULE,
     .open = proc_open,
@@ -29,14 +33,33 @@ static const struct file_operations proc_fops={
     .release = single_release,
 };
 
-static int _init date_proc_init(void){
+// 
+// Shuttle Set up
+//
+static int shuttle_init(void)
+{
     proc_create("terminal", 0, NULL, &proc_fops);
     return 0;
 }
 
-static void _exit date_proc_exit(void){
+// 
+//
+static int shuttle_exit(void)
+{
+    proc_remove_entry("terminal", NULL);
+    return 0;
+}
+
+/*
+static int _init shuttle_proc_init(void){
+    proc_create("terminal", 0, NULL, &proc_fops);
+    return 0;
+}
+
+static void _exit shuttle_proc_exit(void){
     remove_proc_entry("terminal", NULL);
 }
+*/
 
 module_init(shuttle_init);
 module_exit(shuttle_exit);

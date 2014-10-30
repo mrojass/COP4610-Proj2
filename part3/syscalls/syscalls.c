@@ -15,7 +15,7 @@ asmlinkage int sys_start_shuttle(void){
     if(STUB_start_shuttle)
         STUB_start_shuttle();
     else
-        printk(KERN_ALERT "Start Shuttle Error.");
+        printk(KERN_ALERT "Error: Can't start shuttle.");
     
     return 0;
 }
@@ -24,7 +24,7 @@ asmlinkage int sys_top_shuttle(void){
     if(STUB_stop_shuttle)
         STUB_stop_shuttle();
     else
-        printk(KERN_ALERT "Stop Shuttle Error.");
+        printk(KERN_ALERT "Error: Can't stop shuttle.");
 
     return 0;
 }
@@ -33,7 +33,7 @@ asmlinkage int sys_issue_request(void){
     if(STUB_issue_request)
         STUB_issue_request();
     else
-        printk(KERN_ALERT "Issue Request Error.");
+        printk(KERN_ALERT "Error: There was a problem with Issue_Request.");
     
     return 0;
 }
