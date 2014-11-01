@@ -10,7 +10,7 @@
 #include "syscalls.h"
 #include "shuttle.h"
 
-MODULE_LICENSE("GPL");
+MODULE_LICENSE("Dual BSD/GPL");
 
 // *******************
 // Module Function
@@ -68,9 +68,6 @@ static int proc_stats(struct seq_file *m, void *v){
 // **************
 static int shuttle_init(void)
 {
-    STUB_start_shuttle = start_shuttle;
-    STUB_stop_shuttle = stop_shuttle;
-    STUB_issue_request = issue_request;
     entry = proc_create("terminal", 0, NULL, &proc_fops);
     if(entry == NULL)
 	   return -ENOMEM;
