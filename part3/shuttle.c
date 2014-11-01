@@ -2,9 +2,6 @@
 
 extern struct Shuttle shuttle;
 
-static int loadPassengers();
-static int unloadPassengers();
-
 void clearShuttle(struct Shuttle * shuttle);
 
 // ********************************************
@@ -24,15 +21,5 @@ int main_run(void){
 
 	//NOTE: Check Project2-4 powerpoint.
 
-	return 0;
-}
-
-static int loadPassengers(){
-
-	return 0;
-}
-
-static int unloadPassengers(){
-	
 	return 0;
 }

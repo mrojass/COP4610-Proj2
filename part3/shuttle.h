@@ -51,6 +51,3 @@ struct Passenger{
 // Function Declarations
 // **********************
 int main_run(void); 	//Main functionality.
-
-
-
