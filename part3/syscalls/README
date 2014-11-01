@@ -1,0 +1,12 @@
+This folder is stored in the kernel.
+ShuttleSys goes in the Linux_Distro/.
+	should be Linux-3.17.1/ShuttleSys
+
+Everything else goes in their respective places.
+ 
+ linux-3.17.1/arch/x86/syscalls/syscall_64.tbl
+ linux-3.17.1/arch/x86/syscalls/Makefile
+
+ linux-3.17.1/include/linux/syscalls.h
+
+
