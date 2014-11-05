@@ -6,6 +6,7 @@
 #include <linux/linkage.h>
 #include <linux/export.h>
 #include <linux/kthread.h>
+#include <linux/init.h>
 
 #include "syscalls.h"
 #include "shuttle.h"
@@ -16,9 +17,6 @@ MODULE_LICENSE("Dual BSD/GPL");
 // Module Function
 // 	Declarations
 // *******************
-static int shuttle_init(void);
-static int shuttle_exit(void);
-
 extern int(*STUB_start_shuttle) (void);
 extern int(*STUB_issue_request) (char passenger_type, int initial_terminal, int destination_terminal);
 extern int(*STUB_stop_shuttle) (void);
@@ -36,6 +34,11 @@ static struct proc_dir_entry * entry;
 // *******************
 static int proc_open(struct inode *inode, struct file *file);
 static int proc_stats(struct seq_file *m, void *v);
+
+// ******************
+// Global Struct
+// ******************
+struct Shuttle shuttle;
 
 // ******************
 // File OP Struct
@@ -83,14 +86,13 @@ static int shuttle_init(void)
 // ****************
 // Shuttle Clean up
 // ****************
-static int shuttle_exit(void)
+static void shuttle_exit(void)
 {
     STUB_start_shuttle = NULL;
     STUB_stop_shuttle = NULL;
     STUB_issue_request = NULL;
     proc_remove(entry);
 
-    return 0;
 }
 
 module_init(shuttle_init);

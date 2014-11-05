@@ -1,7 +1,7 @@
 ifneq ($(KERNELRELEASE),)
-	TARGET = shuttle_module
+	TARGET = the_shuttle_module
 
-	shuttle_module-objs := shuttle_module.o syscalls.o shuttle.o
+	the_shuttle_module-objs := shuttle_module.o syscalls.o shuttle.o
 
 	obj-m:= $(TARGET).o
 
