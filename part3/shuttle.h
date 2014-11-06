@@ -19,7 +19,7 @@ struct Shuttle{
 	// Tracks Terminal Location
 	int currentTerminal;
 	int destinationTerminal;
-
+	
 	// 0=Child, 1=Adult, 2=Adult&Luggage
 	int passengerCount[3]; 
 	int passengerDelivered[3];
@@ -46,8 +46,23 @@ struct Passenger{
 	enum passengerType type;
 };
 
+// *************
+//  Terminal
+//  Struct
+// *************
+struct Terminal {
+	int terminalNumber;
+
+	//Doule Linked List
+	struct list_head waitingPassenger;
+
+	//Enum
+	enum passengerType type;
+};
+
 
 // **********************
 // Function Declarations
 // **********************
 int main_run(void); 	//Main functionality.
+void initShuttle(struct Shuttle* shuttle);	//Initializes Shuttle.

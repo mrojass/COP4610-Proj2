@@ -2,7 +2,17 @@
 
 extern struct Shuttle shuttle;
 
-void clearShuttle(struct Shuttle * shuttle);
+// ********************************************
+// Initialize Shuttle.
+// ********************************************
+void initShuttle(struct Shuttle * shuttle){
+
+	shuttle->currentTerminal = 3;
+	shuttle->status = PARKED;
+	shuttle->passengerCount[0] = 0;
+	shuttle->passengerCount[1] = 0;
+	shuttle->passengerCount[2] = 0;
+}
 
 // ********************************************
 // Run starts the shuttle.
