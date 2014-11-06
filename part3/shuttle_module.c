@@ -39,6 +39,7 @@ static int proc_stats(struct seq_file *m, void *v);
 // Global Struct
 // ******************
 struct Shuttle shuttle;
+struct Terminal terminals[5];
 
 // ******************
 // File OP Struct
@@ -75,6 +76,12 @@ static int shuttle_init(void)
     if(entry == NULL)
 	   return -ENOMEM;
 
+	//int i;
+	//for(i=0; i < 5; i++){
+	//	INIT_LIST_HEAD(&terminal[i].waitingPassengers);
+	//}
+
+	initShuttle(&shuttle);
 
 	STUB_start_shuttle = &start_shuttle;
 	STUB_stop_shuttle = &stop_shuttle;
