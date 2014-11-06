@@ -76,9 +76,9 @@ static int shuttle_init(void)
     if(entry == NULL)
 	   return -ENOMEM;
 
-	//int i;
+	//int i = 0;
 	//for(i=0; i < 5; i++){
-	//	INIT_LIST_HEAD(&terminal[i].waitingPassengers);
+	//	INIT_LIST_HEAD(&terminals[i].waitingPassengers);
 	//}
 
 	initShuttle(&shuttle);

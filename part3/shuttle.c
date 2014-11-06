@@ -20,8 +20,6 @@ void initShuttle(struct Shuttle * shuttle){
 //   until it has been stopped.
 // ********************************************
 
-void loadPassengers();
-void unloadPassengers();
 int main_run(void){
 
 	//While shuttle is running

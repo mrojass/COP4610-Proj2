@@ -1,5 +1,5 @@
 #include "syscalls.h"
-#include ""
+
 extern struct Shuttle shuttle;
 
 
@@ -28,8 +28,7 @@ int stop_shuttle(void){
 
 int issue_request(char passenger_type, int initial_terminal, int destination_terminal){
 
-	int issue_request(char passenger_type, int initial_terminal, int destination_terminal){
-
+	/*
 	if (shuttle->currentTerminal == destination_terminal)
 	{
 		return 0;
@@ -53,5 +52,6 @@ int issue_request(char passenger_type, int initial_terminal, int destination_ter
 
 		list_add_tail(&passenger->list, &terminal_list[initial_terminal]->waitingPassengers); 
 	}
+	*/
 	return 0;
 }
